@@ -11,7 +11,7 @@ This class starts with very simple logic:
 
 from typing import List, Dict, Tuple, Optional
 
-from dataset import POSITIVE_WORDS, NEGATIVE_WORDS
+from dataset import POSITIVE_WORDS, NEGATIVE_WORDS, NEGATION_WORDS
 
 
 class MoodAnalyzer:
@@ -31,6 +31,7 @@ class MoodAnalyzer:
         # Store as sets for faster lookup.
         self.positive_words = set(w.lower() for w in positive_words)
         self.negative_words = set(w.lower() for w in negative_words)
+        self.negation_words = set(w.lower() for w in NEGATION_WORDS)
 
     # ---------------------------------------------------------------------
     # Preprocessing
@@ -107,14 +108,21 @@ class MoodAnalyzer:
 
         tokens = self.preprocess(text)
         score = 0
+        negate = False
 
         for token in tokens:
+            if token in self.negation_words:
+                negate = True
+                continue
+
             if token in self.positive_words:
-                score += 1
-            if token in self.negative_words:
-                score -= 1
+                score += -1 if negate else 1
+            elif token in self.negative_words:
+                score += 1 if negate else -1
+
+            negate = False
+
         return score
-        pass
 
     # ---------------------------------------------------------------------
     # Label prediction
@@ -148,7 +156,7 @@ class MoodAnalyzer:
             return "negative"
         else:
             return "neutral"
-        pass
+        pass  
 
     # ---------------------------------------------------------------------
     # Explanations (optional but recommended)
