@@ -39,6 +39,8 @@ class MoodAnalyzer:
     def preprocess(self, text: str) -> List[str]:
         """
         Convert raw text into a list of tokens the model can work with.
+        @param text: The raw input text.
+        @return: A list of tokens.
 
         TODO: Improve this method.
 
@@ -52,6 +54,23 @@ class MoodAnalyzer:
           - Handle simple emojis separately (":)", ":-(", "🥲", "😂")
           - Normalize repeated characters ("soooo" -> "soo")
         """
+
+        #handle emojis
+        emoji_mapping = {
+            ":)": "happy",
+            ":-)": "happy",
+            ":(": "sad",
+            ":-(": "sad",
+            "😂": "happy",
+            "🥲": "sad",
+        }
+        for emoji, replacement in emoji_mapping.items():
+            text = text.replace(emoji, f" {replacement} ")
+
+        #remove punctuation
+        punctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+        for p in punctuation:
+            text = text.replace(p, '')
         cleaned = text.strip().lower()
         tokens = cleaned.split()
 
@@ -67,6 +86,8 @@ class MoodAnalyzer:
 
         Positive words increase the score.
         Negative words decrease the score.
+        @param text: The raw input text.
+        @return: A numeric score where higher means more positive mood.
 
         TODO: You must choose AT LEAST ONE modeling improvement to implement.
         For example:
@@ -83,6 +104,15 @@ class MoodAnalyzer:
         #
         # Hint: if you implement negation, you may want to look at pairs of tokens,
         # like ("not", "happy") or ("never", "fun").
+
+        tokens = self.preprocess(text)
+        score = 0
+
+        for token in tokens:
+            if token in self.positive_words:
+                score += 1
+            if token in self.negative_words:
+                score -= 1
         pass
 
     # ---------------------------------------------------------------------
