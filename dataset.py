@@ -50,6 +50,14 @@ SAMPLE_POSTS = [
     "This is fine",
     "So excited for the weekend",
     "I am not happy about this",
+    "omg just got the job offer 😭🎉 actually crying rn",
+    "ngl today was lowkey perfect, no notes",
+    "why does everything have to be so hard rn 😮‍💨",
+    "missed my alarm, spilled my coffee, forgot my keys. it's that kind of day",
+    "going to the store later I guess",
+    "another monday lol",
+    "had so much fun tonight but now I'm home and kinda sad?? idk 😅",
+    "got promoted but it means more hours 💀 not sure how I feel",
 ]
 
 # Human labels for each post above.
@@ -65,6 +73,14 @@ TRUE_LABELS = [
     "neutral",   # "This is fine"
     "positive",  # "So excited for the weekend"
     "negative",  # "I am not happy about this"
+    "positive",  # "omg just got the job offer 😭🎉 actually crying rn"
+    "positive",  # "ngl today was lowkey perfect, no notes"
+    "negative",  # "why does everything have to be so hard rn 😮‍💨"
+    "negative",  # "missed my alarm, spilled my coffee, forgot my keys. it's that kind of day"
+    "neutral",   # "going to the store later I guess"
+    "neutral",   # "another monday lol"
+    "mixed",     # "had so much fun tonight but now I'm home and kinda sad?? idk 😅"
+    "mixed",     # "got promoted but it means more hours 💀 not sure how I feel"
 ]
 
 # TODO: Add 5-10 more posts and labels.
