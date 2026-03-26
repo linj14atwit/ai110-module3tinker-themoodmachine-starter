@@ -113,6 +113,7 @@ class MoodAnalyzer:
                 score += 1
             if token in self.negative_words:
                 score -= 1
+        return score
         pass
 
     # ---------------------------------------------------------------------
@@ -140,6 +141,13 @@ class MoodAnalyzer:
         #   2. Return "positive" if the score is above 0.
         #   3. Return "negative" if the score is below 0.
         #   4. Return "neutral" otherwise.
+        score = self.score_text(text)
+        if score > 0:
+            return "positive"
+        elif score < 0:
+            return "negative"
+        else:
+            return "neutral"
         pass
 
     # ---------------------------------------------------------------------
